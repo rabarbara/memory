@@ -1,7 +1,7 @@
 <template>
-  <div class="box" @click="turnCard">
-    <div class="front" v-bind:class="{flip_back: active[index]}"><div>{{element[index]}}</div></div>
-    <div class="back" v-bind:class="{flip: active[index]}"></div>
+  <div class="box" @click="turnCard" v-bind:class="{hidden: visible}">
+    <div class="front" v-bind:class="{flip_back: flipped}"><div>{{element[index]}}</div></div>
+    <div class="back" v-bind:class="{flip: flipped}"></div>
   </div>
 </template>
 
@@ -9,36 +9,48 @@
   export default {
     data: function () {
       return {
-
+        activeness: this.active
       }
     },
     props: ['active', 'element', 'index'],
     methods: {
       turnCard () {
-        this.$emit('clicked', this.index)
+        if (!this.visible) {
+          this.$emit('clicked', this.index)
+        }
+      }
+    },
+    computed: {
+      visible () {
+        if (this.active[this.index] === 2) {
+          return true
+        }
       },
-      computed: {
-
+      flipped () {
+        if (this.active[this.index] === 1) {
+          return true
+        }
+        return false
       }
     }
   }
 </script>
 
 <style lang="scss" scoped>
+.box.hidden {
+      visibility: hidden;
+    }
   .box {
+    display:flex;
     position: relative;
     text-align: center;
-    // padding: 10px;
-    // height: 180px;
-    margin:10px 0 0 1%;
-    width: calc(100% * (1/4) - 2%);
-    padding-top: calc(100% * (1/4) - 2%);
-    // flex-grow: 1;
-    // flex:1;
+
     justify-content: center;
     flex-wrap: wrap;
     align-content: center;
-    // margin: 1%;
+    height:8rem;
+    width:8rem;
+    margin: 1%;
     .front {
       position: absolute;
       top: 0;

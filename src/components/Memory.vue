@@ -19,7 +19,7 @@
     name: 'Memory',
     data: function () {
       return {
-        boxes: 2,
+        boxes: 4,
         selectedCount: 0,
         shuffled: [],
         selected: [],
@@ -75,11 +75,10 @@
           if (indexOfSelected !== index) {
             this.selected.splice(index, 1, 1)
             if (this.shuffled[indexOfSelected] === this.shuffled[index]) {
-              let value = this.shuffled[index]
               setTimeout(() => {
-                this.selected = this.selected.map(x => 0).slice(0, -2)
-                this.shuffled = this.shuffled.filter(x => {
-                  return x !== value
+                this.selected = this.selected.map(x => {
+                  if (x) return 2
+                  return 0
                 })
               }, 1000)
             }
@@ -88,7 +87,13 @@
             console.log(this.selected[indexOfSelected], index)
           }
         } else if (this.selectedCount === 2) {
-          this.selected = this.selected.map(x => 0)
+          this.selected = this.selected.map(x => {
+            console.log(x)
+            if (x === 2) {
+              return x
+            }
+            return 0
+          })
           this.selectedCount = 0
           this.selected.splice(index, 1, 1)
           this.selectedCount += 1
@@ -132,7 +137,7 @@
   .cont {
     display: flex;
     margin: 0 auto;
-    width: 80%;
+    width: 60%;
     flex-wrap: wrap;
 
   }
