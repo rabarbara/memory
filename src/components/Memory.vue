@@ -1,6 +1,6 @@
 <template>
   <div class="cont">
-    <card v-bind:active=shuffled v-for="el,index in matrix" v-on:clicked="checkMatch" v-bind:element="el" v-bind:index="index" :key="el"></card>
+    <card v-bind:active="selected" v-for="el,index in matrix" v-on:clicked="checkMatch" v-bind:element="shuffled" v-bind:index="index" :key="index"></card>
   </div>
 </template>
 
@@ -45,15 +45,30 @@
         // just concat the shuffled array with itself to get two of each element
         const newArr = shuffled.concat(shuffled)
         this.shuffled = newArr
+        this.selected = newArr.map(x => {
+          return 0
+        })
         return newArr
       }
     },
     methods: {
-      checkMatch: function (message, params) {
-        console.log('clickedmessage')
-        console.log(message, params)
-        // const el = params[0]
-        // console.log(this.$children[para])
+      checkMatch: function (index) {
+        let selected = this.selected
+        const numberOfTimesAppearing = selected.filter((x) => {
+          return x === 1
+        })
+        if (numberOfTimesAppearing.length === 0) {
+          // to overcome caveat 1 in https://vuejs.org/v2/guide/list.html#Caveats mutate in place
+          this.selected.splice(index, 1, 1)
+        } else if (numberOfTimesAppearing.length === 1) {
+          console.log(this.selected)
+          let indexOfSelected = this.selected.indexOf(1)
+          if (indexOfSelected !== index) {
+            this.selected.splice(index, 1, 1)
+          } else {
+            console.log(this.selected[indexOfSelected], index)
+          }
+        }
       }
     }
   }
