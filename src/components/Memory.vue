@@ -53,21 +53,26 @@
     },
     methods: {
       checkMatch: function (index) {
-        let selected = this.selected
-        const numberOfTimesAppearing = selected.filter((x) => {
-          return x === 1
-        })
-        if (numberOfTimesAppearing.length === 0) {
+        if (this.selectedCount === 0) {
           // to overcome caveat 1 in https://vuejs.org/v2/guide/list.html#Caveats mutate in place
           this.selected.splice(index, 1, 1)
-        } else if (numberOfTimesAppearing.length === 1) {
-          console.log(this.selected)
+          this.selectedCount += 1
+        } else if (this.selectedCount === 1) {
           let indexOfSelected = this.selected.indexOf(1)
           if (indexOfSelected !== index) {
             this.selected.splice(index, 1, 1)
+            if (this.shuffled[indexOfSelected] === this.shuffled[index]) {
+              console.log('match')
+            }
+            this.selectedCount += 1
           } else {
             console.log(this.selected[indexOfSelected], index)
           }
+        } else if (this.selectedCount === 2) {
+          this.selected = this.selected.map(x => 0)
+          this.selectedCount = 0
+          this.selected.splice(index, 1, 1)
+          this.selectedCount += 1
         }
       }
     }
