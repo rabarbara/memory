@@ -1,7 +1,7 @@
 <template>
   <div class="box" @click="turnCard">
-    <div class="front" v-bind:class="{flip_back: active}">{{active[index]}}</div>
-    <div class="back" v-bind:class="{flip: active}"></div>
+    <div class="front" v-bind:class="{flip_back: active[index]}"><div>{{element[index]}}</div></div>
+    <div class="back" v-bind:class="{flip: active[index]}"></div>
   </div>
 </template>
 
@@ -9,13 +9,13 @@
   export default {
     data: function () {
       return {
-        shuffled: this.active
+
       }
     },
     props: ['active', 'element', 'index'],
     methods: {
       turnCard () {
-        this.$emit('clicked', this.number, this._uid)
+        this.$emit('clicked', this.index)
       },
       computed: {
 
@@ -28,14 +28,17 @@
   .box {
     position: relative;
     text-align: center;
-    padding: 10px;
-    height: 180px;
-    width: 22%;
+    // padding: 10px;
+    // height: 180px;
+    margin:10px 0 0 1%;
+    width: calc(100% * (1/4) - 2%);
+    padding-top: calc(100% * (1/4) - 2%);
+    // flex-grow: 1;
     // flex:1;
     justify-content: center;
     flex-wrap: wrap;
     align-content: center;
-    margin: 1%;
+    // margin: 1%;
     .front {
       position: absolute;
       top: 0;
@@ -48,6 +51,18 @@
       // z-index:2;
       backface-visibility: hidden;
       transition: 1s all;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      div {
+
+        font-size: 3rem;
+        color: #0977b5;
+        font-weight:bold;
+
+      }
+
     }
     .back {
       position: absolute;
