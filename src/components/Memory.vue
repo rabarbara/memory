@@ -75,12 +75,10 @@
           if (indexOfSelected !== index) {
             this.selected.splice(index, 1, 1)
             if (this.shuffled[indexOfSelected] === this.shuffled[index]) {
-              setTimeout(() => {
-                this.selected = this.selected.map(x => {
-                  if (x) return 2
-                  return 0
-                })
-              }, 1000)
+              this.selected = this.selected.map(x => {
+                if (x) return 2
+                return 0
+              })
             }
             this.selectedCount += 1
           } else {

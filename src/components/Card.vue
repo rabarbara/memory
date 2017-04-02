@@ -27,7 +27,7 @@
         }
       },
       flipped () {
-        if (this.active[this.index] === 1) {
+        if (this.active[this.index] === 1 || this.active[this.index] === 2) {
           return true
         }
         return false
@@ -38,19 +38,22 @@
 
 <style lang="scss" scoped>
 .box.hidden {
-      visibility: hidden;
+      opacity: 0;
     }
   .box {
+    visibility:1;
     display:flex;
     position: relative;
     text-align: center;
-
+    opacity: 1;
+    transition: opacity 1s ease 1s;
     justify-content: center;
     flex-wrap: wrap;
     align-content: center;
     height:8rem;
     width:8rem;
     margin: 1%;
+
     .front {
       position: absolute;
       top: 0;
@@ -68,11 +71,9 @@
       justify-content: center;
 
       div {
-
         font-size: 3rem;
         color: #0977b5;
         font-weight:bold;
-
       }
 
     }
