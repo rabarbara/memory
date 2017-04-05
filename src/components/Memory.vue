@@ -1,7 +1,10 @@
 <template>
 <div>
-<p>Vpiši, koliko kock želiš (sodo število): <input type="text" v-model="boxes"></input>
-<button @click="startGame()">{{game}}</button>
+
+<button href="" @click="startGame(6)" class="fancy-button pop-onhover bg-gradient1">mala</button>
+<button @click="startGame(8)" class="fancy-button pop-onhover bg-gradient1">Srednja</button>
+<button @click="startGame(10)" class="fancy-button pop-onhover bg-gradient1">Velika</button>
+
 <div class="cont">
 
     <card v-bind:active="selected" v-for="el,index in shuffled" v-on:clicked="checkMatch" v-bind:element="shuffled" v-bind:index="index" :key="index"></card>
@@ -97,7 +100,8 @@
           this.selectedCount += 1
         }
       },
-      startGame () {
+      startGame (int) {
+        this.boxes = int
         // http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
         /**
          * Randomize array element order in-place.
@@ -121,7 +125,10 @@
         let shuffled = shuffleArray(matrix).slice(0, upperLimit / 2)
         // just concat the shuffled array with itself to get two of each element
         const newArr = shuffled.concat(shuffled)
-        this.shuffled = newArr
+        this.shuffled = shuffleArray(newArr)
+        this.selected = newArr.map(x => {
+          return 2
+        })
         this.selected = newArr.map(x => {
           return 0
         })
@@ -139,4 +146,23 @@
     flex-wrap: wrap;
 
   }
+button {
+  background: #8b09b5;
+  border:none;
+  box-shadow: 2px 2px 10px rgba(0,0,0,.5);
+  font-size: 1.1rem;
+  font-family: verdana;
+  padding:10px;
+  color:white;
+  margin-left: 1%;
+  text-transform: uppercase;
+  transition: box-shadow .5s ease;
+  &:hover {
+    box-shadow: 5px 5px 8px rgba(0,0,0,.7);
+  }
+  margin-bottom: 2rem;
+  cursor: pointer;
+}
+
+
 </style>
