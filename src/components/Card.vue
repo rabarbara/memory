@@ -46,7 +46,7 @@
     position: relative;
     text-align: center;
     opacity: 1;
-    transition: opacity 1s ease 1s;
+    transition: opacity .5s ease .4s;
     justify-content: center;
     flex-wrap: wrap;
     align-content: center;
@@ -65,7 +65,7 @@
       transform: rotateY(180deg);
       // z-index:2;
       backface-visibility: hidden;
-      transition: 1s all;
+      transition: .5s all;
       display: flex;
       align-items: center;
       justify-content: center;
