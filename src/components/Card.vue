@@ -1,6 +1,6 @@
 <template>
   <div class="box" @click="turnCard" v-bind:class="{hidden: visible}">
-    <div class="front" v-bind:class="{flip_back: flipped}"><div>{{element[index]}}</div></div>
+    <div class="front" v-bind:class="{flip_back: flipped}"><div>{{element}}</div></div>
     <div class="back" v-bind:class="{flip: flipped}"></div>
   </div>
 </template>
@@ -22,12 +22,12 @@
     },
     computed: {
       visible () {
-        if (this.active[this.index] === 2) {
+        if (this.active === 2) {
           return true
         }
       },
       flipped () {
-        if (this.active[this.index] === 1 || this.active[this.index] === 2) {
+        if (this.active === 1 || this.active === 2) {
           return true
         }
         return false
