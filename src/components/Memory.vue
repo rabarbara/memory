@@ -51,8 +51,6 @@
               })
             }
             this.selectedCount += 1
-          } else {
-            console.log(this.selected[indexOfSelected], index)
           }
         } else if (this.selectedCount === 2) {
           this.selected = this.selected.map(x => {
