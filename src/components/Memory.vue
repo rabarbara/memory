@@ -32,36 +32,6 @@
     computed: {
       rows () {
         return this.boxes / 2
-      },
-      matrix () {
-        // http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-        /**
-         * Randomize array element order in-place.
-         * Using Durstenfeld shuffle algorithm.
-         */
-        function shuffleArray (array) {
-          for (var i = array.length - 1; i > 0; i--) {
-            var j = Math.floor(Math.random() * (i + 1))
-            var temp = array[i]
-            array[i] = array[j]
-            array[j] = temp
-          }
-          return array
-        }
-        const upperLimit = this.rows * this.rows
-        let matrix = []
-        for (let i = 1; i < upperLimit + 1; i++) {
-          matrix.push(i)
-        }
-        // select only the first half of the elements in a shuffled array
-        let shuffled = shuffleArray(matrix).slice(0, upperLimit / 2)
-        // just concat the shuffled array with itself to get two of each element
-        const newArr = shuffled.concat(shuffled)
-        this.shuffled = newArr
-        this.selected = newArr.map(x => {
-          return 0
-        })
-        return newArr
       }
     },
     methods: {
