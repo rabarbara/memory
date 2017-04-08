@@ -1,15 +1,12 @@
 <template>
 <div>
 
-<button href="" @click="startGame(6)" class="fancy-button pop-onhover bg-gradient1">mala</button>
-<button @click="startGame(8)" class="fancy-button pop-onhover bg-gradient1">Srednja</button>
-<button @click="startGame(10)" class="fancy-button pop-onhover bg-gradient1">Velika</button>
+  <button @click="startGame(6)" class="fancy-button pop-onhover bg-gradient1">mala</button>
+  <button @click="startGame(8)" class="fancy-button pop-onhover bg-gradient1">srednja</button>
+  <button @click="startGame(10)" class="fancy-button pop-onhover bg-gradient1">velika</button>
 
-<div class="cont">
-
+  <div class="cont">
     <card v-bind:active="selected" v-for="el,index in shuffled" v-on:clicked="checkMatch" v-bind:element="shuffled" v-bind:index="index" :key="index"></card>
-
-
   </div>
   </div>
 
